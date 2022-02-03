@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static int dia;
     public static int mes;
     public static int anio;
+    public static int minimoFamiliar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,29 @@ public class MainActivity extends AppCompatActivity {
         int mesHoy = ahora.get(Calendar.MONTH);
         int anioHoy = ahora.get(Calendar.YEAR);
 
-
+        if (anioHoy-anio <65){
+            minimoFamiliar=5550;
+        }
+        if (anioHoy-anio>65 && anioHoy-anio<75){
+            minimoFamiliar=6468;
+        }
+        if (anioHoy-anio>=75){
+            minimoFamiliar=7590;
+        }
+        if (anioHoy-anio==65){
+            if (mesHoy-mes>0){
+                minimoFamiliar=6468;
+            }
+            if (mesHoy-mes==0){
+                if (diaHoy-dia>0){
+                    minimoFamiliar=6468;
+                } else {
+                    minimoFamiliar=5550;
+                }
+            } else {
+                minimoFamiliar=5550;
+            }
+        }
 
     }
 
