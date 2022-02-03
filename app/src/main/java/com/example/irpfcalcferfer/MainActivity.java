@@ -72,9 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 calcularBaseImponible();
                 calcularDescendientes();
                 calcularMinPersonal();
-
                 calcularMinimoFamiliar();
 
+                Intent intent = new Intent(MainActivity.this, Lista.class);
+                startActivity(intent);
             }
         });
 
