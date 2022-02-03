@@ -2,10 +2,13 @@ package com.example.irpfcalcferfer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -16,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     TextView salarioBruto;
     Button botonFecha;
     Button botonCalcular;
+    DatePickerDialog datePickerDialog;
+
+    Calendar ahora = Calendar.getInstance();
+    int diaHoy = ahora.get(Calendar.DAY_OF_MONTH);
+    int mesHoy = ahora.get(Calendar.MONTH);
+    int anioHoy = ahora.get(Calendar.YEAR);
 
     public static Double baseIRPF;
     public static final int rendimientoTrabajo=2000;
@@ -43,8 +52,16 @@ public class MainActivity extends AppCompatActivity {
         botonFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Calendario.class);
-                    startActivity(intent);
+                    datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            dia = dayOfMonth;
+                            mes = month+1;
+                            anio = year;
+                            fechaNacimiento.setText(dia + "/" + mes + "/" + anio);
+                        }
+                    }, diaHoy, mesHoy, anioHoy);
+                    datePickerDialog.show();
             }
         });
 
@@ -52,9 +69,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calcularseguridadSocial();
-                calcularMinPersonal();
                 calcularBaseImponible();
                 calcularDescendientes();
+                calcularMinPersonal();
+
                 calcularMinimoFamiliar();
 
             }
@@ -63,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calcularseguridadSocial(){
-        salario= Double.parseDouble((String) salarioBruto.getText());
+        salario= Double.parseDouble(String.valueOf(salarioBruto.getText()));
         baseIRPF= salario * 0.0635;
+        Log.d("BaseSS", String.valueOf(baseIRPF));
     }
 
     public void calcularBaseImponible(){
         baseImponible = salario - rendimientoTrabajo - baseIRPF;
+        Log.d("BaseImponible", String.valueOf(baseImponible));
     }
 
     public void calcularDescendientes(){
@@ -89,14 +109,14 @@ public class MainActivity extends AppCompatActivity {
         if (numeroHijos>4){
             eurosPorHijo=4500+4000+2400+2700;
         }
+        Log.d("Descendientes", String.valueOf(eurosPorHijo));
     }
 
 
+
+
     public void calcularMinPersonal(){
-        Calendar ahora = Calendar.getInstance();
-        int diaHoy = ahora.get(Calendar.DAY_OF_MONTH);
-        int mesHoy = ahora.get(Calendar.MONTH);
-        int anioHoy = ahora.get(Calendar.YEAR);
+
 
         if (anioHoy-anio <65){
             minimoPersonal =5550;
@@ -121,11 +141,13 @@ public class MainActivity extends AppCompatActivity {
                 minimoPersonal =5550;
             }
         }
+        Log.d("MPersonal", String.valueOf(minimoPersonal));
 
     }
 
     public void calcularMinimoFamiliar(){
         minimoFamiliar = minimoPersonal+eurosPorHijo;
+        Log.d("MFamiliar", String.valueOf(minimoFamiliar));
     }
 
 

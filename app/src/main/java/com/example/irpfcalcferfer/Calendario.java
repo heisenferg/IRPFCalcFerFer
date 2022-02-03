@@ -2,6 +2,7 @@ package com.example.irpfcalcferfer;
 
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Calendario extends AppCompatActivity {
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_calendario);
 
 
         CalendarView calendarView = findViewById(R.id.calendario);
@@ -25,6 +25,7 @@ public class Calendario extends AppCompatActivity {
                     MainActivity.dia = dayOfMonth;
                     MainActivity.mes = month;
                     MainActivity.anio = year;
+
             }
         });
     }
