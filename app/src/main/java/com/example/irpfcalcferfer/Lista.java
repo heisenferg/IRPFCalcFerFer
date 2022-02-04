@@ -159,7 +159,7 @@ public class Lista extends AppCompatActivity {
             sTramoD = "Segundo tramo al 24 % = " + tramoD + " €";
             sTramoC = "Tercer tramo al 30 % = " + tramoC + " €";
             sTramoB = "Cuarto tramo al  37 % = " + tramoB + " €";
-            sTramoA = exceso +  + tramoA + " €";
+            sTramoA = exceso +  " € del último tramo al 19 % = "  + tramoA + " €";
             miLista.add(sTramoE);
             miLista.add(sTramoD);
             miLista.add(sTramoC);
@@ -182,7 +182,7 @@ public class Lista extends AppCompatActivity {
             miLista.add(sTramoBFam);
             miLista.add(sTramoAFam);
 
-            miLista.add("----------------------------");
+            miLista.add("-----------------------------------------");
             Double pagoTotal = totalA-totalB;
             String total = "TOTAL ("+totalA+") - ("+totalB+") = " + pagoTotal;
             miLista.add(total);
