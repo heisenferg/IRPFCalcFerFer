@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         if (numeroHijos==3){
             eurosPorHijo=4000+2400+2700;
         }
-        if (numeroHijos>4){
+        if (numeroHijos>=4){
             eurosPorHijo=4500+4000+2400+2700;
         }
         Log.d("Descendientes", String.valueOf(eurosPorHijo));
